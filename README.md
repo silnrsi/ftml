@@ -26,7 +26,7 @@ There are four main elements around which the file format is structured:
     <test label="required">
       <!-- define test data and metadata here -->
     </test>
-	<test../>
+    <test../>
   </testgroup>
   <testgroup../>
 </ftml>
@@ -66,8 +66,8 @@ The **styles** element is optional since tests do not need to be associated with
 
 Each **style** has a number of attributes:
 
-- **feats**: This is a comma-separated list of id-value pairs (with id enclosed in single quotes followed by a space and the value) which specify the font features to be used for this string. This format is identical to [css font-feature-settings property](http://www.w3.org/TR/css3-fonts/#font-feature-settings-prop) except that a value is required even for _boolean_ features (for example: `feats="'smcp' 1, 'swsh' 2"`). The list is minimal (that is only those features that differ from the defaults set by the language are specified) and stored with ids in alphabetical order, for canonicalization purposes. This is optional.
-- **lang**: This is a language tag, in HTML (i.e. [BCP47](http://www.ietf.org/rfc/bcp/bcp47.txt)) format. This is optional.
+- **feats**: This is a comma-separated list of id-value pairs (with id enclosed in single quotes followed by a space and the value) which specify the font features to be used for this string. This format is identical to [css font-feature-settings property](http://www.w3.org/TR/css3-fonts/#font-feature-settings-prop) except that a value is required even for _boolean_ features (for example: `feats="'smcp' 1, 'swsh' 2"`). The list is minimal (that is only those features that differ from the defaults set by the language are specified) and stored with ids in alphabetical order, for canonicalization purposes. This attribute is optional.
+- **lang**: This is a language tag, in HTML (i.e. [BCP47](http://www.ietf.org/rfc/bcp/bcp47.txt)) format. This attribute is optional.
 - **name**: This specifies the name of the style being defined. Because the name of the style can be used as CSS style indentifier, the attribute value must not include whitespace. This attribute is required.
 
 The **style** elements are optional.
@@ -89,7 +89,7 @@ The attributes correspond to predefined identified columns:
 Note that this element is merely a hint, an application is free to display tests however it wants. The element is optional and all attributes are optional.
 
 ## 3. Test Groups `testgroup`
-Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested, though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group). 
+Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group). 
 
 This specification does not attach semantic meaning to such nesting, and FTML consumers are free to utilize or display such nesting as they desire. One example use, and the one that initially drove the request, is to display tests from an inner group as columns in a table.
 
@@ -98,7 +98,7 @@ A **testgroup** has the following attributes:
 - **background**: Specifies the default background colour for the entire testgroup. The colour is specified in the form #xxyyzz where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
 - **label**: A textual label for the group by which it is identified. This is a required attribute.
 
-A **testgroup** takes a single optional **comment** and zero or more **test** and (in the case of the outermost test group) **testgroup** elements as direct children. Empty **testgroup** elements may occur.
+A **testgroup** takes a single optional **comment** and zero or more **test** and (in the case of the outermost test group) **testgroup** elements as direct children. Empty **testgroup** elements are permitted.
 
 ### comment
 A **comment** element may be used to provide descriptive information about a test group. The text child of this element specifies the comment text. This element is optional and, if present, must not be empty.
