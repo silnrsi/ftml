@@ -1,9 +1,7 @@
 Font Test Markup Language
 =========================
 
-Font Test Markup Language (ftml) is a file format
-
-
+Font Test Markup Language (ftml) is a file format for specifying the content and structure of font test data. It is designed to support complex test data, such as strings with specific language tags or data that should presented with certain font features activated. It also allows for indication of what portions of test data are in focus and which are only present to provide context.
 
 # File Format
 There are four main elements around which the file format is structured: 
@@ -36,7 +34,7 @@ There are four main elements around which the file format is structured:
 ## 1. Root `ftml`
 The root **ftml** element has the following attributes:
 
-- **version**	The version of the file format. This attribute is required and is currently "1.0".
+- **version**: The version of the file format. This attribute is required and is currently "1.0".
 
 The **ftml** element takes a required head element and one or more testgroup elements as direct children.
 
@@ -68,11 +66,9 @@ The **styles** element is optional since tests do not need to be associated with
 
 Each **style** has a number of attributes:
 
-- **feats**	This is a comma-separated list of id-value pairs (with id enclosed in single quotes followed by a space and the value) which specify the font features to be used for this string. This format is identical to [css font-feature-settings property](http://www.w3.org/TR/css3-fonts/#font-feature-settings-prop) except that a value is required even for _boolean_ features (for example: `feats="'smcp' 1, 'swsh' 2"`). The list is minimal (that is only those features that differ from the defaults set by the language are specified) and stored with ids in alphabetical order, for canonicalization purposes. This is optional.
-
-- **lang**	This is a language tag, in HTML (i.e. [BCP47](http://www.ietf.org/rfc/bcp/bcp47.txt)) format. This is optional.
-
-- **name**	This specifies the name of the style being defined. Because the name of the style can be used as CSS style indentifier, the attribute value must not include whitespace. This attribute is required.
+- **feats**: This is a comma-separated list of id-value pairs (with id enclosed in single quotes followed by a space and the value) which specify the font features to be used for this string. This format is identical to [css font-feature-settings property](http://www.w3.org/TR/css3-fonts/#font-feature-settings-prop) except that a value is required even for _boolean_ features (for example: `feats="'smcp' 1, 'swsh' 2"`). The list is minimal (that is only those features that differ from the defaults set by the language are specified) and stored with ids in alphabetical order, for canonicalization purposes. This is optional.
+- **lang**: This is a language tag, in HTML (i.e. [BCP47](http://www.ietf.org/rfc/bcp/bcp47.txt)) format. This is optional.
+- **name**: This specifies the name of the style being defined. Because the name of the style can be used as CSS style indentifier, the attribute value must not include whitespace. This attribute is required.
 
 The **style** elements are optional.
 
@@ -84,11 +80,11 @@ This element describes table and column widths. Each width may be specified in a
 
 The attributes correspond to predefined identified columns:
 
-- **comment**	Specifies the width for the comment column.
-- **label**	Specifies the width of the column used to present the test label.
-- **string**	Specifies the width of the column for the rendered test strings.
-- **stylename**	Specifies the width of the column giving the styling class for the test.
-- **table** Specifies overall width of the table
+- **comment**: Specifies the width for the comment column.
+- **label**: Specifies the width of the column used to present the test label.
+- **string**: Specifies the width of the column for the rendered test strings.
+- **stylename**: Specifies the width of the column giving the styling class for the test.
+- **table**: Specifies overall width of the table
 
 Note that this element is merely a hint, an application is free to display tests however it wants. The element is optional and all attributes are optional.
 
@@ -99,9 +95,10 @@ This specification does not attach semantic meaning to such nesting, and FTML co
 
 A **testgroup** has the following attributes:
 
-- **background**	Specifies the default background colour for the entire testgroup. The colour is specified in the form #xxyyzz where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
-- **label**	A textual label for the group by which it is identified. This is a required attribute.
-- A **testgroup** takes a single optional **comment** and zero or more **test** and (in the case of the outermost test group) **testgroup** elements as direct children. Empty **testgroup** elements may occur.
+- **background**: Specifies the default background colour for the entire testgroup. The colour is specified in the form #xxyyzz where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
+- **label**: A textual label for the group by which it is identified. This is a required attribute.
+
+A **testgroup** takes a single optional **comment** and zero or more **test** and (in the case of the outermost test group) **testgroup** elements as direct children. Empty **testgroup** elements may occur.
 
 ### comment
 A **comment** element may be used to provide descriptive information about a test group. The text child of this element specifies the comment text. This element is optional and, if present, must not be empty.
@@ -109,10 +106,10 @@ A **comment** element may be used to provide descriptive information about a tes
 ## 4. Tests `test`
 A **test** element contains the text data and parameters for a specific test. It has the following attributes:
 
-- **background**	Specifies the background colour for the test. The colour is specified in the form `#xxyyzz` where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
-- **label**	Identifying label for the test. This attribute is required.
-- **rtl**	Set to `True` if the test is to be run with the paragraph direction set to right to left. This attribute is optional and applied only to the string.
-- **stylename**	Styling class that references a **style** in the header. This attribute is optional and is applied only to the string.
+- **background**: Specifies the background colour for the test. The colour is specified in the form `#xxyyzz` where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
+- **label**: Identifying label for the test. This attribute is required.
+- **rtl**: Set to `True` if the test is to be run with the paragraph direction set to right to left. This attribute is optional and applied only to the string.
+- **stylename**: Styling class that references a **style** in the header. This attribute is optional and is applied only to the string.
 
 This element is optional. A test contains a single string element and an optional comment element.
 
