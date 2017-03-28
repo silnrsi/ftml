@@ -8,10 +8,10 @@ Font Test Markup Language (ftml) is a file format
 # File Format
 There are four main elements around which the file format is structured: 
 
-1. Root - defines file format version
-2. Header - sets general parameters for how tests are styled and presented
-3. Test groups - groups test for presentation purposes
-4. Tests - contains test data
+1. **Root** - Defines file format version
+2. **Header** - Sets general parameters for how tests are styled and presented
+3. **Test groups** - Groups test for presentation purposes
+4. **Tests** - Contains test data
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -34,10 +34,7 @@ There are four main elements around which the file format is structured:
 </ftml>
 ```
 ## 1. Root `ftml`
-The root element is:
-
-### ftml
-The **ftml** element has the following attributes:
+The root **ftml** element has the following attributes:
 
 - **version**	The version of the file format. This attribute is required and is currently "1.0".
 
@@ -134,7 +131,7 @@ This element is required and may be empty.
 #### em
 The **em** subelement of string identifies those portions of the test data that are the logical focus for the test. If **em** elements are present, test data outside of the **em** elements is considered context and FTML consumers might, for example, use colour to de-emphasize the context data. This element is optional.
 
-## Canonicalization
+# Canonicalization
 To facilitate version control, the following canonicalization of the layout of the XML is strongly encouraged.
 
 * All the attributes of an element shall be on the same line as the tag and be listed in alphabetical order of attribute name. Exception: in the XML initial [processing instructions](http://www.w3.org/TR/WD-xml-961114.html#sec2.5) the conventional order will be used.
@@ -155,7 +152,7 @@ To facilitate version control, the following canonicalization of the layout of t
 * Empty attributes are not present.
 * Colour values are represented using lower case hex digits.
 
-## Example
+# Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -181,3 +178,5 @@ To facilitate version control, the following canonicalization of the layout of t
 </ftml>
 ```
 
+# Tools
+(to be added)
