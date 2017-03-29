@@ -36,7 +36,7 @@ The root **ftml** element has the following attributes:
 
 - **version**: The version of the file format. This attribute is required and is currently "1.0".
 
-The **ftml** element takes a required head element and one or more testgroup elements as direct children.
+The **ftml** element takes a required **head** element and one or more **testgroup** elements as direct children.
 
 ## 2. Header `head`
 The **head** element contains shared information across all the tests in the file. The information held here gives concrete styling for use by presentation tools that have no other information to override the information stored here. This element is required. To allow for easy extensibility, applications are required to preserve all elements in the header even if they do not understand them. Additional optional elements added to the header do not require a version increase.
@@ -52,7 +52,7 @@ This specifies the relative scaling that should be applied to text in the given 
 ### fontsrc
 This specifies a font source that may be used to render the tests. This mechanism is not intended to meet all needs, especially for projects that have more than one weight or style of font, so ftml consumers are permitted to implement their own mechanism for font selection.
 
-The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified (unless there is a specific reason to include more than one) - the CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`. 
+The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified. The CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`. 
 
 This element is optional.
 
@@ -86,7 +86,7 @@ The attributes correspond to predefined identified columns:
 - **stylename**: Specifies the width of the column giving the styling class for the test.
 - **table**: Specifies overall width of the table
 
-Note that this element is merely a hint, an application is free to display tests however it wants. The element is optional and all attributes are optional.
+Note that this element is merely a hint. An application is free to display tests however it wants. The element is optional and all attributes are optional.
 
 ## 3. Test Groups `testgroup`
 Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group). 
