@@ -4,7 +4,7 @@ Font Test Markup Language
 Font Test Markup Language (ftml) is a file format for specifying the content and structure of font test data. It is designed to support complex test data, such as strings with specific language tags or data that should presented with certain font features activated. It also allows for indication of what portions of test data are in focus and which are only present to provide context.
 
 # File Format
-There are four main elements around which the file format is structured: 
+There are four main elements around which the file format is structured:
 
 1. **Root** - Defines file format version
 2. **Header** - Sets general parameters for how tests are styled and presented
@@ -52,12 +52,12 @@ This specifies the relative scaling that should be applied to text in the given 
 ### fontsrc
 This specifies a font source that may be used to render the tests. This mechanism is not intended to meet all needs, especially for projects that have more than one weight or style of font, so ftml consumers are permitted to implement their own mechanism for font selection.
 
-The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified. The CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`. 
+The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified. The CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`.
 
 This element is optional.
 
 ### styles
-Different tests may be rendered using different styling. The primary concern here is the use of font feature and language information. The styles element contains a list of style elements that specify how text of a given style name should be rendered. 
+Different tests may be rendered using different styling. The primary concern here is the use of font feature and language information. The styles element contains a list of style elements that specify how text of a given style name should be rendered.
 
 The **styles** element is optional since tests do not need to be associated with a style. If present, the
 **styles** element takes one or more **style** elements as direct children.
@@ -89,7 +89,7 @@ The attributes correspond to predefined identified columns:
 Note that this element is merely a hint. An application is free to display tests however it wants. The element is optional and all attributes are optional.
 
 ## 3. Test Groups `testgroup`
-Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group). 
+Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group).
 
 This specification does not attach semantic meaning to such nesting, and FTML consumers are free to utilize or display such nesting as they desire. One example use, and the one that initially drove the request, is to display tests from an inner group as columns in a table.
 
@@ -117,7 +117,7 @@ This element is optional. A test contains a single string element and an optiona
 A **comment** element may be used to supply descriptive text for a test. The text value of this element specifies the comment text. This element is optional and, if present, must not be empty.
 
 ### string
-The **string** element contains the text data for the test. Optionally, string elements can have **em** subelements. The test data is defined to be the concatenation of the text children of the string and any **em** subelements. 
+The **string** element contains the text data for the test. Optionally, string elements can have **em** subelements. The test data is defined to be the concatenation of the text children of the string and any **em** subelements.
 
 Within the test data, the notation `\u` followed by 4, 5 or 6 hexadecimal digits is supported for representing the Unicode character that corresponds to that hexadecimal value. FTML processors must preserve `\u` notation except during processing needed for rendering. FTML producers need to be aware that there is no delimiter on this sequence (other than the maximum of 6 digits). Therefore if a character to be encoded using this notation is followed immediately by a character that could be interpreted as a hexadecimal digit, the producer should pad the digit sequence with leading zeros to bring its length to 6 digits.
 
@@ -176,4 +176,8 @@ To facilitate version control, the following canonicalization of the layout of t
 ```
 
 # Tools
-(to be added)
+There are a number of .xsl tools in this repository which are documented in the FTML.md file.
+
+Additionally a python tool to generate a LibreOffice writer document from FTML input is available as part of [pysilfont].
+
+[pysilfont]: https://github.com/silnrsi/pysilfont
