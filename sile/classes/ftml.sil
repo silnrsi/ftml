@@ -1,0 +1,8 @@
+\begin[class=ftml]{document}
+%\include[src=examples/macros.sil]
+\script[src=packages/color]
+\script[src=packages/frametricks]
+\script[src=packages/linespacing]
+%\showframe[id=all]
+\define[command=supereject]{\vfill\penalty[penalty=-20000]}% copied from plain.lua
+\end{document}

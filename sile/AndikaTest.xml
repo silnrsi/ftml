@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ftml.xsl"?>
+<ftml version="1.0">
+  <head>
+    <comment>Test of Andika features</comment>
+    <fontscale>000134</fontscale>
+    <fontsrc>local(Andika New Basic)</fontsrc>
+    <styles>
+      <style feats="'dig0' 1" name="dig0"/>
+      <style feats="'dig1' 1" name="dig1"/>
+      <style feats="'dig0' 1, 'dig1' 1" name="dig10"/>
+      <style feats="'dig4' 1" name="dig4"/>
+      <style feats="'dig0' 1, 'dig4' 1" name="dig40"/>
+      <style feats="'dig1' 1, 'dig4' 1" name="dig41"/>
+      <style feats="'dig0' 1, 'dig1' 1, 'dig4' 1" name="dig410"/>
+      <style feats="'dig7' 1" name="dig7"/>
+      <style feats="'dig0' 1, 'dig7' 1" name="dig70"/>
+      <style feats="'dig1' 1, 'dig7' 1" name="dig71"/>
+      <style feats="'dig0' 1, 'dig1' 1, 'dig7' 1" name="dig710"/>
+      <style feats="'dig4' 1, 'dig7' 1" name="dig74"/>
+      <style feats="'dig0' 1, 'dig4' 1, 'dig7' 1" name="dig740"/>
+      <style feats="'dig1' 1, 'dig4' 1, 'dig7' 1" name="dig741"/>
+      <style feats="'dig0' 1, 'dig1' 1, 'dig4' 1, 'dig7' 1" name="dig7410"/>
+      <style lang='vi' name='lang_vi'/>
+    </styles>
+    <title>Andika test</title>
+    <widths comment="20%" label="20%" string="50%" stylename="10%" table="100%"/>
+  </head>
+  <testgroup label="Test of Andika digit features">
+    <comment>combinations of 0, 1, 4 and 7</comment>
+    <test label="Default"><comment>no options</comment><string>0147</string></test>
+    <test label="0 on" stylename="dig0"><comment>0 option</comment><string>0147</string></test>
+    <test label="1 on" stylename="dig1"><comment>1 option</comment><string>0147</string></test>
+    <test label="10 on" stylename="dig10"><comment>0 and 1 options</comment><string>0147</string></test>
+    <test label="4 on" stylename="dig4"><comment>4 option</comment><string>0147</string></test>
+    <test label="40 on" stylename="dig40"><comment>0 and 4 options</comment><string>0147</string></test>
+    <test label="41 on" stylename="dig41"><comment>1 and 4 options</comment><string>0147</string></test>
+    <test label="410 on" stylename="dig410"><comment>0, 1 and 4 options</comment><string>0147</string></test>
+    <test label="7 on" stylename="dig7"><comment>7 option</comment><string>0147</string></test>
+    <test label="70 on" stylename="dig70"><comment>0 and 7 options</comment><string>0147</string></test>
+    <test label="71 on" stylename="dig71"><comment>1 and 7 options</comment><string>0147</string></test>
+    <test label="710 on" stylename="dig710"><comment>0, 1 and 7 options</comment><string>0147</string></test>
+    <test label="74 on" stylename="dig74"><comment>4 and 7 options</comment><string>0147</string></test>
+    <test label="740 on" stylename="dig740"><comment>0, 4 and 7 options</comment><string>0147</string></test>
+    <test label="741 on" stylename="dig741"><comment>1, 4 and 7 options</comment><string>0147</string></test>
+    <test label="7410 on" stylename="dig7410"><comment>0, 1, 4 and 7 options</comment><string>0147</string></test>
+  </testgroup>
+  <testgroup label="Test of background and emphasis">
+    <comment>NB: featured digit is emphasized</comment>
+    <test background="#7f0000" label="0 on" stylename="dig0"><comment>0 option</comment><string><em>0</em>14</string></test>
+    <test background="#007f00" label="1 on" stylename="dig1"><comment>1 option</comment><string>0<em>1</em>4</string></test>
+    <test background="#7f7f00" label="10 on" stylename="dig10"><comment>0 and 1 options</comment><string><em>01</em>4</string></test>
+    <test background="#00007f" label="4 on" stylename="dig4"><comment>4 option</comment><string>01<em>4</em></string></test>
+    <test background="#7f007f" label="40 on" stylename="dig40"><comment>0 and 4 options</comment><string><em>0</em>1<em>4</em></string></test>
+    <test background="#007f7f" label="41 on" stylename="dig41"><comment>1 and 4 options</comment><string>0<em>14</em></string></test>
+    <test background="#7f7f7f" label="410 on" stylename="dig410"><comment>0, 1 and 4 options</comment><string>014</string></test>
+    <test background="#7f7f7f" label="410 on" stylename="dig410"><comment>0, 1 and 4 options</comment><string><em>0</em><em>1</em><em>4</em></string></test>
+  </testgroup>
+  <testgroup label='Test of Vietnamese lang feature'>
+    <test label='default'>
+      <string>A\u0302\u0300</string>
+    </test>
+    <test label='lang="vi"' stylename='lang_vi'>
+      <string>A\u0302\u0300</string>
+    </test>
+    <test label='default'>
+      <string>Ầ</string>
+    </test>
+    <test label='lang="vi"' stylename='lang_vi'>
+      <string>Ầ</string>
+    </test>
+  </testgroup>
+</ftml>
+
