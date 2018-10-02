@@ -5,4 +5,17 @@
 \script[src=packages/linespacing]
 %\showframe[id=all]
 \define[command=supereject]{\vfill\penalty[penalty=-20000]}% copied from plain.lua
+\define[command=ftml:title]{\begin[left=true,right=true]{ragged}
+\font[size=20pt,weight=700,family=Arial]{\process}
+\end{ragged}}
+\define[command=ftml:comment]{\font[style=italic]{\process}}
+\define[command=ftml:testgrouplabel]{
+\skip[height=12pt plus 4pt minus 4pt]
+\font[size=14pt,weight=700,family=Arial]{\process}
+\skip[height=12pt plus 4pt minus 4pt]
+}
+\define[command=ftml:testgroupcomment]{
+\font[style=italic]{\process}
+\skip[height=12pt plus 4pt minus 4pt]
+}
 \end{document}

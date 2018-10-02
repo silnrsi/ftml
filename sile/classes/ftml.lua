@@ -6,6 +6,8 @@ local ftml = SILE.baseClass { id = "ftml" }
 SILE.require("packages/counters")
 SILE.require("packages/bidi")
 SILE.require("packages/rules")
+SILE.require("packages/color")
+SILE.require("packages/rebox")
 
 SU.debug("ftml", "font list loaded into SILE.scratch.ftmlfontlist: " .. SILE.scratch.ftmlfontlist)
 -- Note: can't use the normal SILE.scratch.ftml.xxx namespace
@@ -95,13 +97,20 @@ SILE.registerCommand("hbox", function (options, content)
   return hbox
 end, "Compiles all the enclosed horizontal-mode material into a single hbox")
 
-
-SILE.registerCommand("boxTo", function (options, content)
-  local box = SILE.Commands["hbox"]({}, content)
-  if options.width then box.width = SILE.length.new({length = SILE.toPoints(options.width)}) end
-  if options.height then box.height = SILE.toPoints(options.height) end
-  table.insert(SILE.typesetter.state.nodes, box)
-end, "Set a box with a defined width and height")
+SILE.registerCommand("ragged", function (options, content)
+  SILE.settings.temporarily(function ()
+    if options.left then SILE.settings.set("document.lskip", SILE.nodefactory.hfillGlue) end
+    if options.right then SILE.settings.set("document.rskip", SILE.nodefactory.hfillGlue) end
+    SILE.settings.set("typesetter.parfillskip", SILE.nodefactory.zeroGlue)
+    SILE.settings.set("document.parindent", SILE.nodefactory.zeroGlue)
+    local space = SILE.length.parse("1spc")
+    space.stretch = 0
+    space.shrink = 0
+    SILE.settings.set("document.spaceskip", space)
+    SILE.process(content)
+    SILE.call("par")
+  end)
+end)
 
 local function parsefontname(s)
   local num = 0
@@ -326,6 +335,9 @@ At this point
   SU.debug("ftml", SILE.scratch.ftml.tablecolumns)
   SU.debug("ftml", "table column list end")
 
+  -- Process some header text
+  if head_title then SILE.call("ftml:title", {}, head_title) end
+  if head_comment then SILE.call("ftml:comment", {}, head_comment) end
 end)
 
 
@@ -336,20 +348,14 @@ SILE.registerCommand("testgroup", function (options, content)
   local testgroup_label = options["label"]
   local testgroup_background = options["background"] -- need to store for use at test level
   local testgroup_comment = SILE.findInTree(content, "comment")
-  if testgroup_comment then testgroup_comment = testgroup_comment[1] end
   -- does comment element need to be removed from content to avoid being reprocessed?
   SU.debug("ftml", testgroup_label .. " " .. testgroup_background .. " " .. testgroup_comment)
   -- Need to output testgroup_label and testgroup_comment
   SILE.typesetter:leaveHmode()
-  SILE.typesetter:pushExplicitVglue(SILE.nodefactory.newVglue("12pt plus 4pt minus 4pt"))
-  SILE.typesetter:typeset(testgroup_label)
+  SILE.call("ftml:testgrouplabel", {}, {testgroup_label})
   if testgroup_comment then
-    SILE.typesetter:leaveHmode()
-    SILE.typesetter:pushExplicitVglue(SILE.nodefactory.newVglue("12pt plus 4pt minus 4pt"))
-    SILE.typesetter:typeset(testgroup_comment)
+    SILE.call("ftml:testgroupcomment", {}, testgroup_comment)
   end
-  SILE.typesetter:leaveHmode()
-  SILE.typesetter:pushExplicitVglue(SILE.nodefactory.newVglue("6pt plus 2pt minus 2pt"))
   SILE.process(content)
   SU.debug("ftml", "exiting testgroup")
 end)
@@ -421,14 +427,29 @@ SILE.registerCommand("string", function (options, content)
   SU.debug("ftml", "content: " .. content)
   SILE.scratch.ftml.spaceusedmax = 0
   SILE.scratch.ftml.stylename = SILE.scratch.ftml.testgroup[#(SILE.scratch.ftml.testgroup)].stylename
+  SILE.scratch.ftml.background = SILE.scratch.ftml.testgroup[#(SILE.scratch.ftml.testgroup)].background
   SU.debug("ftml", "stylename: " .. SILE.scratch.ftml.stylename)
   --SILE.repl()
   if SILE.scratch.ftml.stylename and SILE.scratch.ftml.stylename ~= "" then
     SU.debug("ftml", SILE.scratch.ftml.head.styles[SILE.scratch.ftml.stylename].lang)
     SU.debug("ftml", SILE.scratch.ftml.head.styles[SILE.scratch.ftml.stylename].feats)
   end
+  if #SILE.scratch.ftml.background > 0 then
+    SILE.call("color", {color = SILE.scratch.ftml.background}, function ()
+      SILE.call("rebox", {width=0,height=0}, function ()
+       for c = 1,#colinfo do
+          if colinfo[c].name == "gutter" then
+            SILE.call("glue", {width=colinfo[c].width.."pt", height=12})
+          else
+            SILE.call("hrule", {width=colinfo[c].width, height=12})
+          end
+        end
+      end)
+    end)
+  end
+
   for c = 1,#colinfo do
-    SILE.call("boxTo", {width = colinfo[c].width }, function ()
+    SILE.call("rebox", {width = colinfo[c].width }, function ()
       -- reset all columns to defaults
       SILE.settings.set("font.family", "Arial")
       SILE.settings.set("font.filename", "")
@@ -437,7 +458,7 @@ SILE.registerCommand("string", function (options, content)
       SILE.settings.set("font.size", 8)
       SILE.settings.set("font.direction", "LTR")
       SILE.settings.set("font.features", "")
-      SILE.settings.set("document.language", "en-US")
+      SILE.settings.set("document.language", "en")
       local colname = colinfo[c].name -- label, stringX, stylename, comment
       if not string.find(colname, "string") then -- if colname doesn't contain "string"
         SILE.settings.set("linespacing.method", "fixed")
