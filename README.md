@@ -11,6 +11,8 @@ There are four main elements around which the file format is structured:
 3. **Test groups** - Groups test for presentation purposes
 4. **Tests** - Contains test data
 
+For validation purposes, sub elements of an element always occur in the order listed for them in this document. It is incidental that the order happens to also be alphabetic, but may not remain that way.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ftml version="1.0">
@@ -54,7 +56,7 @@ This specifies a font source that may be used to render the tests. This mechanis
 
 The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified. The CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`.
 
-This element is optional.
+This element is optional, and there may be more than one of them.
 
 ### styles
 Different tests may be rendered using different styling. The primary concern here is the use of font feature and language information. The styles element contains a list of style elements that specify how text of a given style name should be rendered.
@@ -89,7 +91,7 @@ The attributes correspond to predefined identified columns:
 Note that this element is merely a hint. An application is free to display tests however it wants. The element is optional and all attributes are optional.
 
 ## 3. Test Groups `testgroup`
-Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. If desired, test groups can be nested though, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group).
+Tests are grouped into one or more **testgroup** elements. No test may exist outside of a test group. A **testgroup** is either a list of zero or more **test**s or, if desired, a list of sub **testgroup**s. Although, until such time as a real use-case for deeper nesting is demonstrated, only one level of nesting is permitted (i.e. the outer test group and inner test group).
 
 This specification does not attach semantic meaning to such nesting, and FTML consumers are free to utilize or display such nesting as they desire. One example use, and the one that initially drove the request, is to display tests from an inner group as columns in a table.
 
@@ -98,7 +100,7 @@ A **testgroup** has the following attributes:
 - **background**: Specifies the default background colour for the entire testgroup. The colour is specified in the form #xxyyzz where x, y and z are hex digits and the value xx specifies the red value, yy the green value and zz the blue value. This attribute is optional.
 - **label**: A textual label for the group by which it is identified. This is a required attribute.
 
-A **testgroup** takes a single optional **comment** and zero or more **test** and (in the case of the outermost test group) **testgroup** elements as direct children. Empty **testgroup** elements are permitted.
+A **testgroup** takes a single optional **comment** at the start.
 
 ### comment
 A **comment** element may be used to provide descriptive information about a test group. The text child of this element specifies the comment text. This element is optional and, if present, must not be empty.
@@ -133,13 +135,13 @@ To facilitate version control, the following canonicalization of the layout of t
 
 * All the attributes of an element shall be on the same line as the tag and be listed in alphabetical order of attribute name. Exception: in the XML initial [processing instructions](http://www.w3.org/TR/WD-xml-961114.html#sec2.5) the conventional order will be used.
 * Inline elements start and end on the same line as their parent and immediately adjacent to any sibling text children. The following are designated as inline elements:
-   * **em**
+    * **em**
 * With the exception of inline elements:
-   * Indentation of child elements is 2 spaces and child elements start on the following line after the opening parent element. The closing tag for the parent is on a line after the last child element with the same indentation as the opening tag.
-   * Child elements are sorted by tag.
-   * In the cases where multiple elements of the same tag may exist:
-      * The **style** elements are sorted by their name attribute
-      * The order of all others, including **testgroup** and **test** elements, and any unrecognized elements within the head element, is preserved
+    * Indentation of child elements is 2 spaces and child elements start on the following line after the opening parent element. The closing tag for the parent is on a line after the last child element with the same indentation as the opening tag.
+    * Child elements are sorted by tag, according to the order listed in this document.
+    * In the cases where multiple elements of the same tag may exist:
+         * The **style** elements are sorted by their name attribute
+         * The order of all others, including **testgroup** and **test** elements, and any unrecognized elements within the head element, is preserved
 * There are no blank lines between elements.
 * text children occur immediately following the parent element. The closing tag immediately follows the last character of the text.
 * Text is stored in UTF-8 with no entities other than as required by xml (i.e. `<` and & are stored as entities in text, and `>`, `&` and `"` are stored as entities in attributes).

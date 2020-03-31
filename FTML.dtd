@@ -1,7 +1,7 @@
-<!ELEMENT ftml (head, (testgroup)+) >
+<!ELEMENT ftml (head, testgroup+) >
 <!ATTLIST ftml
     version CDATA "1.0">
-<!ELEMENT head (comment?, fontscale?, fontsrc, styles?, title?, widths?)>
+<!ELEMENT head (comment?, fontscale?, fontsrc*, styles?, title?, widths?)>
 <!ELEMENT comment (#PCDATA)>
 <!ELEMENT fontscale (#PCDATA)>
 <!ELEMENT fontsrc (#PCDATA)>
@@ -19,15 +19,15 @@
     string  CDATA #IMPLIED
     stylename   CDATA #IMPLIED
     table   CDATA #IMPLIED>
-<!ELEMENT testgroup (comment?, (testgroup*|test*))>
+<!ELEMENT testgroup (comment?, (testgroup* | test*))>
 <!ATTLIST testgroup
     background CDATA #IMPLIED
     label   CDATA #IMPLIED>
-<!ELEMENT test (string, comment?)>
+<!ELEMENT test (comment?, string)>
 <!ATTLIST test
     background CDATA #IMPLIED
     label   CDATA #IMPLIED
     rtl     CDATA #IMPLIED
     stylename   CDATA #IMPLIED>
-<!ELEMENT string (#PCDATA|em)*>
+<!ELEMENT string (#PCDATA | em)*>
 <!ELEMENT em (#PCDATA)>
