@@ -5,6 +5,8 @@
 <!ELEMENT comment (#PCDATA)>
 <!ELEMENT fontscale (#PCDATA)>
 <!ELEMENT fontsrc (#PCDATA)>
+<!ATTLIST fontsrc
+    label   CDATA #IMPLIED>
 <!ELEMENT styles (style)*>
 <!ELEMENT style EMPTY>
 <!ATTLIST style

@@ -54,6 +54,10 @@ This specifies the relative scaling that should be applied to text in the given 
 ### fontsrc
 This specifies a font source that may be used to render the tests. This mechanism is not intended to meet all needs, especially for projects that have more than one weight or style of font, so ftml consumers are permitted to implement their own mechanism for font selection.
 
+The element can take one attribute:
+
+- **label**: A textual label for the fontsrc. This attribute is optional.
+
 The element has a text child which is in the same format as [`src:` parameter of the css `@font-face` attribute](http://www.w3.org/TR/css3-fonts/#src-desc). Although the `src:` parameter supports multiple font sources in the CSS standard, for the purposes of FTML it is recommended that only one `src:` be specified. The CSS standard allows multiple `src:` for fall-back purposes which would rarely make sense in a testing environment. Note that some FTML processors will only see the first `src:`.
 
 This element is optional, and there may be more than one of them.
