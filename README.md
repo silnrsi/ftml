@@ -15,7 +15,7 @@ For validation purposes, sub elements of an element always occur in the order li
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<ftml version="1.0">
+<ftml version="1.1">
   <head>
     <!-- define general parameters here -->
     <styles>
@@ -160,7 +160,7 @@ To facilitate version control, the following canonicalization of the layout of t
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="TestStyleSheet.xsl"?>
-<ftml version="1.0">
+<ftml version="1.1">
   <head>
     <fontscale>150</fontscale>
     <fontsrc>url(Padauk.ttf)</fontsrc>
@@ -181,8 +181,17 @@ To facilitate version control, the following canonicalization of the layout of t
 </ftml>
 ```
 
+# History
+
+## 2020-04  v1.1
+- Add optional `label` element to `<fontsrc>` element
+- DTD updated to validate `<ftml>` version, permitting either 1.0 or 1.1
+
+## 2017-03  v1.0
+- Initial release
+
 # Tools
-There are a number of .xsl tools in this repository which are documented in the FTML.md file.
+There are a number of .xsl tools in this repository which are documented in the tools.md file.
 
 Additionally a python tool to generate a LibreOffice writer document from FTML input is available as part of [pysilfont].
 
