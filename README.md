@@ -54,7 +54,7 @@ This specifies the relative scaling that should be applied to text in the given 
 ### fontsrc
 This specifies a font source that may be used to render the tests. This mechanism is not intended to meet all needs, especially for projects that have more than one weight or style of font, so ftml consumers are permitted to implement their own mechanism for font selection.
 
-The element can take one attribute:
+The element has one attribute:
 
 - **label**: A textual label for the fontsrc. This attribute is optional.
 
