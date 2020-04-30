@@ -184,7 +184,7 @@ To facilitate version control, the following canonicalization of the layout of t
 # History
 
 ## 2020-04  v1.1
-- Add optional `label` element to `<fontsrc>` element
+- Add optional `label` attribute to `<fontsrc>` element
 - DTD updated to validate `<ftml>` version, permitting either 1.0 or 1.1
 
 ## 2017-03  v1.0
