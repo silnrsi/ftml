@@ -1,12 +1,12 @@
 <!ELEMENT ftml (head, testgroup+) >
 <!ATTLIST ftml
-    version CDATA "1.0">
+    version (1.0|1.1) "1.1">
 <!ELEMENT head (comment?, fontscale?, fontsrc*, styles?, title?, widths?)>
 <!ELEMENT comment (#PCDATA)>
 <!ELEMENT fontscale (#PCDATA)>
 <!ELEMENT fontsrc (#PCDATA)>
 <!ATTLIST fontsrc
-    label   CDATA #IMPLIED>
+    label   CDATA #IMPLIED>       <!-- added in v1.1 -->
 <!ELEMENT styles (style)*>
 <!ELEMENT style EMPTY>
 <!ATTLIST style
