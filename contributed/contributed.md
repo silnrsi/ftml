@@ -16,7 +16,7 @@ NB: neither of these support nested `testgroup` elements.
 ```
 ftmlTest('tools/ftml-smith.xsl')
 ```
-and then initiated by including `ftml` or `test` on the smith commandline, e.g.:
+and then initiated by including the target `ftml` or `test` on the smith commandline, e.g.:
 ```
 smith build ftml
 ```
