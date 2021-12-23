@@ -165,7 +165,7 @@ To facilitate version control, the following canonicalization of the layout of t
     <fontscale>150</fontscale>
     <fontsrc>url(Padauk.ttf)</fontsrc>
     <styles>
-      <style feats="’hsln’ 1" lang="kht" name="other"/>
+      <style feats="'hsln' 1" lang="kht" name="other"/>
     </styles>
     <widths comment="30%" label="6em" string="70%"/>
   </head>
